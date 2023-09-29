@@ -7,7 +7,12 @@ A serverless meeting application based on filtering by location and displaying e
 [Meet app](https://sarorian.github.io/meet2/)
 
 # Requirements
-This application uses [Node.js](https://nodejs.org/ "Node.js website") and React
+This application uses 
+- Node.js 
+- React client
+- Express
+- Serverless functionality with AWS and Lambda
+- Google Calendar API
 
 # Local Installation Instructions
 Clone the repository on your machine, then install the npm dependencies using:
