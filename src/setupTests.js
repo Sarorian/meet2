@@ -13,3 +13,6 @@ console.error = (...args) => {
   const ignoreMessage = MESSAGES_TO_IGNORE.find(message => args.toString().includes(message));
   if (!ignoreMessage) originalError(...args);
 }
+
+// Allow browser timeout of 30 secs
+jest.setTimeout(30000);
