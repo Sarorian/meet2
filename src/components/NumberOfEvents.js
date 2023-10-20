@@ -1,8 +1,13 @@
-const NumberOfEvents = ({ setCurrentNOE }) => {
+const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
 
     const handleInputChanged = (event) => {
         const value = event.target.value;
-        setCurrentNOE(value);
+        setErrorAlert("")
+        if (isNaN(value) || value <=0) {
+            setErrorAlert("Number of events must be either a positive number and not empty")
+        } else {
+            setCurrentNOE(value);
+        }
       };
 
     return (
