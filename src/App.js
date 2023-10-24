@@ -1,14 +1,16 @@
+// src/App.js
 
-import { useEffect, useState } from 'react';
-import './App.css';
-import EventList from './components/EventList';
-import CitySearch from './components/CitySearch';
-import NumberOfEvents from './components/NumberOfEvents';
-import { InfoAlert, ErrorAlert } from './components/Alert';
-import { extractLocations, getEvents } from './api';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import EventList from "./components/EventList";
+import CitySearch from "./components/CitySearch";
+import NumberOfEvents from "./components/NumberOfEvents";
+import CityEventChart from "./components/CityEventChart";
+import EventGenresChart from "./components/EventGenresChart";
+import { InfoAlert, ErrorAlert } from "./components/Alert";
+import { extractLocations, getEvents } from "./api";
 
 const App = () => {
-
   const [events, setEvents] = useState([]);
   const [currentNOE, setCurrentNOE] = useState(32);
   const [allLocations, setAllLocations] = useState([]);
@@ -22,31 +24,36 @@ const App = () => {
 
   const fetchData = async () => {
     const allEvents = await getEvents();
-    const filteredEvents = currentCity === "See all cities" ?
-      allEvents :
-      allEvents.filter(event => event.location === currentCity)
+    const filteredEvents =
+      currentCity === "See all cities"
+        ? allEvents
+        : allEvents.filter((event) => event.location === currentCity);
     setEvents(filteredEvents.slice(0, currentNOE));
     setAllLocations(extractLocations(allEvents));
-  }
+  };
 
   return (
     <div className="App">
       <div className="alerts-container">
-        {infoAlert.length ? <InfoAlert text={infoAlert}/> : null}
-        {errorAlert.length ? <ErrorAlert text={errorAlert}/> : null}
+        {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
+        {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
       </div>
-      <CitySearch 
-        allLocations={allLocations} 
+      <CitySearch
+        allLocations={allLocations}
         setCurrentCity={setCurrentCity}
-        setInfoAlert={setInfoAlert} 
+        setInfoAlert={setInfoAlert}
       />
-      <NumberOfEvents 
+      <NumberOfEvents
         setCurrentNOE={setCurrentNOE}
-        setErrorAlert={setErrorAlert} 
+        setErrorAlert={setErrorAlert}
       />
+      <div className="charts-container">
+        <CityEventChart allLocations={allLocations} events={events} />
+        <EventGenresChart events={events} />
+      </div>
       <EventList events={events} />
     </div>
   );
- }
- 
- export default App;
+};
+
+export default App;

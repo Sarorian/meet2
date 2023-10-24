@@ -16,6 +16,13 @@
         "cwd": "${workspaceRoot}",
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch Edge against localhost",
+        "url": "http://localhost:3000/meet2",
+        "webRoot": "${workspaceFolder}"
       }
     ]
   }
